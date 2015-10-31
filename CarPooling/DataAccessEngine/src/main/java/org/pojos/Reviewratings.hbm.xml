@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 1, 2015 12:44:14 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Reviewratings" table="reviewratings" catalog="carpooling">
+        <id name="reviewratingsid" type="java.lang.Integer">
+            <column name="reviewratingsid" />
+            <generator class="identity" />
+        </id>
+        <property name="reviewratingsstringvalue" type="string">
+            <column name="reviewratingsstringvalue" length="100" not-null="true" />
+        </property>
+        <set name="reviews" table="review" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="reviewratingsid" not-null="true" />
+            </key>
+            <one-to-many class="Review" />
+        </set>
+    </class>
+</hibernate-mapping>
