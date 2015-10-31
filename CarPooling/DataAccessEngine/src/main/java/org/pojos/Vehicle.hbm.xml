@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 1, 2015 12:44:14 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Vehicle" table="vehicle" catalog="carpooling">
+        <id name="vehiclenumber" type="string">
+            <column name="vehiclenumber" length="100" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="user" class="User" fetch="select">
+            <column name="owneruserid" length="50" not-null="true" />
+        </many-to-one>
+        <property name="capacity" type="java.lang.Integer">
+            <column name="capacity" />
+        </property>
+        <set name="trips" table="trip" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="vehicleid" length="100" not-null="true" />
+            </key>
+            <one-to-many class="Trip" />
+        </set>
+    </class>
+</hibernate-mapping>

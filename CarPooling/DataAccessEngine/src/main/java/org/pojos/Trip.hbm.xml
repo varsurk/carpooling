@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 1, 2015 12:44:14 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Trip" table="trip" catalog="carpooling">
+        <id name="tripid" type="java.lang.Integer">
+            <column name="tripid" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="User" fetch="select">
+            <column name="tripowneruserid" length="50" not-null="true" />
+        </many-to-one>
+        <many-to-one name="triptype" class="Triptype" fetch="select">
+            <column name="triptype" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pool" class="Pool" fetch="select">
+            <column name="poolid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="vehicle" class="Vehicle" fetch="select">
+            <column name="vehicleid" length="100" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tripstatus" class="Tripstatus" fetch="select">
+            <column name="tripstatus" />
+        </many-to-one>
+        <property name="tripattendance" type="int">
+            <column name="tripattendance" not-null="true" />
+        </property>
+        <property name="tripstarttime" type="timestamp">
+            <column name="tripstarttime" length="19" not-null="true" />
+        </property>
+        <property name="tripendtime" type="timestamp">
+            <column name="tripendtime" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

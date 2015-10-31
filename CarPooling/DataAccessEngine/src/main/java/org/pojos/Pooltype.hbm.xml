@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 1, 2015 12:44:14 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Pooltype" table="pooltype" catalog="carpooling">
+        <id name="pooltypeid" type="java.lang.Integer">
+            <column name="pooltypeid" />
+            <generator class="identity" />
+        </id>
+        <property name="pooltypestringvalue" type="string">
+            <column name="pooltypestringvalue" length="200" not-null="true" />
+        </property>
+        <set name="pools" table="pool" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pooltype" not-null="true" />
+            </key>
+            <one-to-many class="Pool" />
+        </set>
+    </class>
+</hibernate-mapping>
