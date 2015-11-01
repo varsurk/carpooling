@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 1, 2015 12:44:14 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Tripstatus" table="tripstatus" catalog="carpooling">
+        <id name="tripstatusid" type="java.lang.Integer">
+            <column name="tripstatusid" />
+            <generator class="identity" />
+        </id>
+        <property name="tripstatusstringvalue" type="string">
+            <column name="tripstatusstringvalue" length="100" not-null="true" />
+        </property>
+        <set name="trips" table="trip" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tripstatus" />
+            </key>
+            <one-to-many class="Trip" />
+        </set>
+    </class>
+</hibernate-mapping>

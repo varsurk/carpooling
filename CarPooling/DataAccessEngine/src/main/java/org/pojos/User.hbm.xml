@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 1, 2015 12:44:14 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="User" table="user" catalog="carpooling">
+        <id name="userid" type="string">
+            <column name="USERID" length="50" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usertypes" class="Usertypes" fetch="select">
+            <column name="USERTYPE" not-null="true" />
+        </many-to-one>
+        <property name="phonenumber" type="int">
+            <column name="PHONENUMBER" not-null="true" />
+        </property>
+        <property name="boardingpt" type="string">
+            <column name="BOARDINGPT" length="100" not-null="true" />
+        </property>
+        <property name="emailid" type="string">
+            <column name="EMAILID" length="60" not-null="true" />
+        </property>
+        <property name="name" type="string">
+            <column name="NAME" length="100" not-null="true" />
+        </property>
+        <property name="org" type="string">
+            <column name="ORG" length="200" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="PASSWORD" length="45" not-null="true" />
+        </property>
+        <property name="gender" type="string">
+            <column name="GENDER" length="2" />
+        </property>
+        <property name="address1" type="string">
+            <column name="ADDRESS1" length="200" />
+        </property>
+        <property name="address2" type="string">
+            <column name="ADDRESS2" length="200" />
+        </property>
+        <property name="address3" type="string">
+            <column name="ADDRESS3" length="200" />
+        </property>
+        <property name="candrive" type="binary">
+            <column name="CANDRIVE" />
+        </property>
+        <property name="licenseno" type="string">
+            <column name="LICENSENO" length="200" />
+        </property>
+        <set name="trips" table="trip" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tripowneruserid" length="50" not-null="true" />
+            </key>
+            <one-to-many class="Trip" />
+        </set>
+        <set name="reviews" table="review" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="reviewinguserid" length="50" not-null="true" />
+            </key>
+            <one-to-many class="Review" />
+        </set>
+        <set name="vehicles" table="vehicle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="owneruserid" length="50" not-null="true" />
+            </key>
+            <one-to-many class="Vehicle" />
+        </set>
+        <set name="pools" table="userpoolbridge" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="userid" length="50" not-null="true" />
+            </key>
+            <many-to-many entity-name="Pool">
+                <column name="poolid" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

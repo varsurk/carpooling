@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 1, 2015 12:44:14 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Usertypes" table="usertypes" catalog="carpooling">
+        <id name="usertypeid" type="java.lang.Integer">
+            <column name="usertypeid" />
+            <generator class="identity" />
+        </id>
+        <property name="usertypestringvalue" type="string">
+            <column name="usertypestringvalue" length="50" not-null="true" />
+        </property>
+        <set name="users" table="user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="USERTYPE" not-null="true" />
+            </key>
+            <one-to-many class="User" />
+        </set>
+    </class>
+</hibernate-mapping>
